@@ -1,20 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            text-align: center;
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Kvadrātvienādoujma saknes</h1>
     <p>
-        <input type="number" id="a">
-        <input type="number" id="b">
-        <input type="number" id="c">
+        <input type="number" id="a" placeholder="a">
+        <input type="number" id="b" placeholder="b">
+        <input type="number" id="c" placeholder="c">
     </p>
     <p><button type="button" onclick="aprekinat()">Apreķināt</button></p>
+    <div class="rezultats" id="rezultats"></div>
     <script>
+        function diskriminants(a, b, c) {
+            return b * b - 4 * a * c;
+        }
+        function saknes(a, b, D) {
+            if (D < 0) {
+                return false
+            }
+            else {
+                var x1 = (-b + Math.sqrt(D)) / (2 * a);
+                var x2 = (-b - Math.sqrt(D)) / (2 * a);
+                return [x1, x2]
+            }
+        }
+        function aprekinat() {
+            var a = Number(a.value);
+            var b = Number(b.value);
+            var c = Number(c.value);
 
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+                rezultats.innerHTML = "Lūdzu ievadi korektus koeficentus! (a nevar būt 0)"
+                return
+            }
+            var atb = saknes(a, b, diskriminants(a, b, c));
+            if (atb === false) {
+                rezultats.innerHTML = "Kvadrātvienādojumā nav reālu sakņu.";
+            }
+            rezultats.innerHTML = `Saknes: x1=${atb[0].toFixed(3)}, x2=${atb[1].toFixed(3)}`;
+        }
     </script>
 </body>
+
 </html>
