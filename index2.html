@@ -20,34 +20,35 @@
 <body>
     <h1>Kvadrātvienādoujma saknes</h1>
     <p>
-        <input type="number" id="a" placeholder="a">
-        <input type="number" id="b" placeholder="b">
-        <input type="number" id="c" placeholder="c">
+        <input type="number" id="ak" placeholder="a">
+        <input type="number" id="bk" placeholder="b">
+        <input type="number" id="ck" placeholder="c">
     </p>
     <p><button type="button" onclick="aprekinat()">Apreķināt</button></p>
     <div class="rezultats" id="rezultats"></div>
+
     <script>
         function diskriminants(a, b, c) {
             return b * b - 4 * a * c;
         }
         function saknes(a, b, D) {
             if (D < 0) {
-                return false
+                return false;
             }
             else {
                 var x1 = (-b + Math.sqrt(D)) / (2 * a);
                 var x2 = (-b - Math.sqrt(D)) / (2 * a);
-                return [x1, x2]
+                return [x1, x2];
             }
         }
         function aprekinat() {
-            var a = Number(a.value);
-            var b = Number(b.value);
-            var c = Number(c.value);
+            var a = Number(ak.value);
+            var b = Number(bk.value);
+            var c = Number(ck.value);
 
             if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
                 rezultats.innerHTML = "Lūdzu ievadi korektus koeficentus! (a nevar būt 0)"
-                return
+                return;
             }
             var atb = saknes(a, b, diskriminants(a, b, c));
             if (atb === false) {
